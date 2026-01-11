@@ -124,7 +124,8 @@ def display_result_table(response: GenerateResponse, prompt: str) -> None:
     console.print(table)
     console.print()
     console.print(f"[dim]Prompt:[/dim] {prompt[:80]}{'...' if len(prompt) > 80 else ''}")
-    console.print(f"[dim]Credits:[/dim] {format_credits(response.credits_used, response.credits_remaining)}")
+    credits_info = format_credits(response.credits_used, response.credits_remaining)
+    console.print(f"[dim]Credits:[/dim] {credits_info}")
 
 
 def display_result_json(response: GenerateResponse) -> None:
@@ -244,7 +245,7 @@ def generate(
         console.print("[dim]Available models:[/dim]")
         for m in Model:
             console.print(f"  [cyan]{m.value}[/cyan] - {m.description}")
-        raise typer.Exit(1)
+        raise typer.Exit(1) from None
 
     # Validate aspect ratio
     try:
@@ -252,7 +253,7 @@ def generate(
     except ValueError:
         print_error(f"Invalid aspect ratio: {aspect_ratio}")
         console.print("[dim]Available ratios:[/dim]", ", ".join(ar.value for ar in AspectRatio))
-        raise typer.Exit(1)
+        raise typer.Exit(1) from None
 
     async def run_generation() -> GenerateResponse:
         async with PixelDojoClient(api_key=key) as client:
@@ -308,16 +309,16 @@ def generate(
 
     except AuthenticationError as e:
         print_error("Authentication failed. Check your API key.", e)
-        raise typer.Exit(1)
+        raise typer.Exit(1) from None
     except InsufficientCreditsError as e:
         print_error(f"Insufficient credits. {e}", e)
-        raise typer.Exit(1)
+        raise typer.Exit(1) from None
     except RateLimitError as e:
         print_error(f"Rate limit exceeded. {e}", e)
-        raise typer.Exit(1)
+        raise typer.Exit(1) from None
     except PixelDojoError as e:
         print_error(str(e), e)
-        raise typer.Exit(1)
+        raise typer.Exit(1) from None
 
 
 @app.command()
@@ -452,10 +453,10 @@ def config_test() -> None:
         asyncio.run(test_connection())
     except AuthenticationError:
         print_error("Authentication failed. Your API key may be invalid.")
-        raise typer.Exit(1)
+        raise typer.Exit(1) from None
     except PixelDojoError as e:
         print_error(f"Connection test failed: {e}")
-        raise typer.Exit(1)
+        raise typer.Exit(1) from None
 
 
 @app.command()
@@ -467,7 +468,7 @@ def gui() -> None:
     except ImportError as e:
         print_error(f"GUI dependencies not installed: {e}")
         console.print("[dim]Install with: pip install pixeldojo[gui][/dim]")
-        raise typer.Exit(1)
+        raise typer.Exit(1) from None
 
 
 @app.command()

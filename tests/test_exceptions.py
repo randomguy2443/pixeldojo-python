@@ -3,14 +3,14 @@
 import pytest
 
 from pixeldojo.exceptions import (
-    PixelDojoError,
-    AuthenticationError,
-    InsufficientCreditsError,
-    RateLimitError,
     APIError,
-    ValidationError,
-    TimeoutError,
+    AuthenticationError,
     ConnectionError,
+    InsufficientCreditsError,
+    PixelDojoError,
+    RateLimitError,
+    TimeoutError,
+    ValidationError,
 )
 
 

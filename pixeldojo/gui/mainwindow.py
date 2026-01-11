@@ -410,7 +410,7 @@ class MainWindow(QMainWindow):
 
         # Add images to gallery
         for image in response.images:
-            card = self.gallery.add_image(
+            self.gallery.add_image(
                 url=str(image.url),
                 seed=image.seed,
                 dimensions=image.dimensions,

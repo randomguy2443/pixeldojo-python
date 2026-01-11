@@ -1,12 +1,12 @@
 """Tests for CLI application."""
 
+from unittest.mock import patch
+
 import pytest
-from unittest.mock import patch, AsyncMock, MagicMock
 from typer.testing import CliRunner
 
 from pixeldojo.cli.main import app
 from pixeldojo.models import GenerateResponse, ImageResult
-
 
 runner = CliRunner()
 

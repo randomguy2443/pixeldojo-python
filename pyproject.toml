@@ -78,6 +78,9 @@ line-length = 100
 select = ["E", "F", "W", "I", "UP", "ANN", "B", "C4", "PTH", "SIM"]
 ignore = ["ANN101", "ANN102", "ANN401"]
 
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["ANN201", "ANN202", "ANN001"]  # Don't require return type annotations in tests
+
 [tool.mypy]
 python_version = "3.10"
 strict = true

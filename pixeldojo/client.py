@@ -420,13 +420,14 @@ class PixelDojoSyncClient:
     def _get_loop(self) -> asyncio.AbstractEventLoop:
         """Get or create event loop for sync operations."""
         try:
-            loop = asyncio.get_running_loop()
+            asyncio.get_running_loop()
+        except RuntimeError:
+            pass  # No running loop, which is what we want for sync client
+        else:
             raise RuntimeError(
                 "Cannot use sync client from within an async context. "
                 "Use PixelDojoClient instead."
             )
-        except RuntimeError:
-            pass
 
         if self._loop is None or self._loop.is_closed():
             self._loop = asyncio.new_event_loop()

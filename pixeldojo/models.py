@@ -9,9 +9,10 @@ Provides full type safety and validation for:
 
 from __future__ import annotations
 
+from collections.abc import Iterator
 from datetime import datetime
 from enum import Enum
-from typing import Annotated, Any, Iterator
+from typing import Annotated, Any
 
 from pydantic import (
     BaseModel,

@@ -4,11 +4,11 @@ import pytest
 from pydantic import ValidationError
 
 from pixeldojo.models import (
-    Model,
     AspectRatio,
     GenerateRequest,
     GenerateResponse,
     ImageResult,
+    Model,
 )
 
 

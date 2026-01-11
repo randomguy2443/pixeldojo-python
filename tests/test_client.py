@@ -1,17 +1,17 @@
 """Tests for API client."""
 
-import pytest
 from unittest.mock import AsyncMock, MagicMock, patch
-import httpx
+
+import pytest
 
 from pixeldojo.client import PixelDojoClient, PixelDojoSyncClient
-from pixeldojo.models import Model, AspectRatio, GenerateResponse
 from pixeldojo.exceptions import (
+    APIError,
     AuthenticationError,
     InsufficientCreditsError,
     RateLimitError,
-    APIError,
 )
+from pixeldojo.models import AspectRatio, GenerateResponse, Model
 
 
 class TestPixelDojoClient:

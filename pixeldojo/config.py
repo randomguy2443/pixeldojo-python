@@ -164,10 +164,9 @@ class Config(BaseSettings):
 
     def delete_api_key(self) -> None:
         """Remove API key from keyring storage."""
-        try:
+        import contextlib
+        with contextlib.suppress(keyring.errors.PasswordDeleteError):
             keyring.delete_password(KEYRING_SERVICE, KEYRING_USERNAME)
-        except keyring.errors.PasswordDeleteError:
-            pass
         object.__setattr__(self, "api_key", "")
 
     @property

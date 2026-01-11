@@ -7,7 +7,14 @@ from __future__ import annotations
 from pathlib import Path
 
 from PySide6.QtCore import Qt, Signal
-from PySide6.QtGui import QCursor, QImage, QPixmap
+from PySide6.QtGui import (
+    QContextMenuEvent,
+    QCursor,
+    QImage,
+    QMouseEvent,
+    QPixmap,
+    QResizeEvent,
+)
 from PySide6.QtWidgets import (
     QApplication,
     QFileDialog,
@@ -117,19 +124,19 @@ class ImageCard(QFrame):
         )
         self.image_label.setPixmap(scaled)
 
-    def resizeEvent(self, event) -> None:
+    def resizeEvent(self, event: QResizeEvent) -> None:
         """Handle resize to rescale image."""
         super().resizeEvent(event)
         if self.image_data:
             self.set_image(self.image_data)
 
-    def mousePressEvent(self, event) -> None:
+    def mousePressEvent(self, event: QMouseEvent) -> None:
         """Handle mouse click."""
         if event.button() == Qt.MouseButton.LeftButton:
             self.clicked.emit(self)
         super().mousePressEvent(event)
 
-    def contextMenuEvent(self, event) -> None:
+    def contextMenuEvent(self, event: QContextMenuEvent) -> None:
         """Show context menu."""
         menu = QMenu(self)
 
