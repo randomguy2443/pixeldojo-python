@@ -378,7 +378,7 @@ class PixelDojoClient:
         if destination:
             from pathlib import Path
 
-            import aiofiles
+            import aiofiles  # type: ignore[import-untyped]
 
             path = Path(destination)
             path.parent.mkdir(parents=True, exist_ok=True)

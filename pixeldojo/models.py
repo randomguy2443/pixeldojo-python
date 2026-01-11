@@ -220,8 +220,8 @@ class GenerateResponse(BaseModel):
         """Return number of generated images."""
         return len(self.images)
 
-    def __iter__(self) -> Iterator[ImageResult]:
-        """Iterate over images."""
+    def __iter__(self) -> Iterator[ImageResult]:  # type: ignore[override]
+        """Iterate over images (overrides pydantic's field iterator)."""
         return iter(self.images)
 
     def __getitem__(self, index: int) -> ImageResult:
