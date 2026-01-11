@@ -8,7 +8,8 @@ from typer.testing import CliRunner
 from pixeldojo.cli.main import app
 from pixeldojo.models import GenerateResponse, ImageResult
 
-runner = CliRunner()
+# Disable color output for testing
+runner = CliRunner(env={"NO_COLOR": "1", "TERM": "dumb"})
 
 
 class TestCLIBasics:
