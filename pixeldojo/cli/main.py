@@ -17,10 +17,9 @@ import sys
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
-from typing import Annotated, Optional
+from typing import Annotated
 
 import typer
-from rich import print as rprint
 from rich.console import Console
 from rich.panel import Panel
 from rich.progress import (
@@ -31,13 +30,13 @@ from rich.progress import (
     TextColumn,
     TimeElapsedColumn,
 )
+from rich.prompt import Confirm, Prompt
 from rich.table import Table
 from rich.text import Text
-from rich.prompt import Prompt, Confirm
 
 from pixeldojo import __version__
 from pixeldojo.client import PixelDojoClient
-from pixeldojo.config import Config, get_config, reload_config
+from pixeldojo.config import get_config
 from pixeldojo.exceptions import (
     AuthenticationError,
     InsufficientCreditsError,
@@ -188,7 +187,7 @@ def generate(
         ),
     ] = 1,
     seed: Annotated[
-        Optional[int],
+        int | None,
         typer.Option(
             "--seed", "-s",
             help="Random seed for reproducibility",
@@ -203,7 +202,7 @@ def generate(
         ),
     ] = OutputFormat.TABLE,
     download: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option(
             "--download", "-d",
             help="Download images to directory",
@@ -213,7 +212,7 @@ def generate(
         ),
     ] = None,
     api_key: Annotated[
-        Optional[str],
+        str | None,
         typer.Option(
             "--api-key", "-k",
             help="API key (overrides config)",
@@ -401,7 +400,7 @@ def config_show() -> None:
 @config_app.command("set-key")
 def config_set_key(
     api_key: Annotated[
-        Optional[str],
+        str | None,
         typer.Argument(
             help="API key to save (prompts if not provided)",
         ),
@@ -489,7 +488,7 @@ def version_callback(value: bool) -> None:
 @app.callback()
 def main(
     version: Annotated[
-        Optional[bool],
+        bool | None,
         typer.Option(
             "--version", "-V",
             help="Show version and exit",

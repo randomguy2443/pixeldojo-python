@@ -7,13 +7,12 @@ Uses QThread and signals for thread-safe communication with the main UI.
 from __future__ import annotations
 
 import asyncio
-from typing import Any
 
 from PySide6.QtCore import QObject, QThread, Signal
 
 from pixeldojo.client import PixelDojoClient
 from pixeldojo.exceptions import PixelDojoError
-from pixeldojo.models import GenerateResponse, Model, AspectRatio
+from pixeldojo.models import AspectRatio, GenerateResponse, Model
 
 
 class GenerationWorker(QObject):

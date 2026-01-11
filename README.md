@@ -2,6 +2,8 @@
 
 Professional Python client, CLI, and GUI for the PixelDojo AI Image Generation API.
 
+> **Note:** This is an unofficial community SDK, not affiliated with or endorsed by PixelDojo.
+
 ## Features
 
 - **Async API Client**: High-performance async client with sync wrapper, automatic retries, and connection pooling

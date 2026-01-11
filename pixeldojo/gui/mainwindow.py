@@ -4,48 +4,43 @@ Main window for PixelDojo GUI application.
 
 from __future__ import annotations
 
-import json
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
 
-from PySide6.QtCore import Qt, QThread, Slot, QSize
-from PySide6.QtGui import QAction, QKeySequence, QPixmap, QImage, QCloseEvent
+from PySide6.QtCore import Qt, QThread, Slot
+from PySide6.QtGui import QAction, QCloseEvent, QImage, QKeySequence, QPixmap
 from PySide6.QtWidgets import (
-    QMainWindow,
-    QWidget,
-    QVBoxLayout,
-    QHBoxLayout,
-    QLabel,
-    QPushButton,
+    QApplication,
     QComboBox,
-    QSpinBox,
-    QLineEdit,
-    QProgressBar,
-    QStatusBar,
-    QMenuBar,
-    QMenu,
-    QMessageBox,
-    QInputDialog,
     QFileDialog,
-    QSplitter,
-    QScrollArea,
     QFrame,
     QGroupBox,
-    QApplication,
+    QHBoxLayout,
+    QInputDialog,
+    QLabel,
+    QLineEdit,
+    QMainWindow,
+    QMessageBox,
+    QProgressBar,
+    QPushButton,
+    QScrollArea,
     QSizePolicy,
+    QSpinBox,
+    QStatusBar,
+    QVBoxLayout,
+    QWidget,
 )
 
 from pixeldojo import __version__
 from pixeldojo.config import get_config, reload_config
-from pixeldojo.models import Model, AspectRatio, GenerateResponse
 from pixeldojo.gui.widgets import (
-    ImageGallery,
-    PromptInput,
     CreditDisplay,
     ImageCard,
+    ImageGallery,
+    PromptInput,
 )
 from pixeldojo.gui.workers import GenerationWorker, ImageDownloadWorker, run_worker
+from pixeldojo.models import AspectRatio, GenerateResponse, Model
 
 
 class MainWindow(QMainWindow):

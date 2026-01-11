@@ -14,18 +14,16 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from contextlib import asynccontextmanager, contextmanager
-from datetime import datetime
-from typing import Any, AsyncIterator, Callable, Iterator
-from uuid import uuid4
+from collections.abc import Callable
+from typing import Any
 
 import httpx
 from tenacity import (
+    before_sleep_log,
     retry,
     retry_if_exception_type,
     stop_after_attempt,
     wait_exponential,
-    before_sleep_log,
 )
 
 from pixeldojo.config import Config, get_config
@@ -42,8 +40,6 @@ from pixeldojo.models import (
     AspectRatio,
     GenerateRequest,
     GenerateResponse,
-    GenerationJob,
-    ImageResult,
     Model,
 )
 
@@ -131,7 +127,7 @@ class PixelDojoClient:
             self._owned_client = True
         return self._client
 
-    async def __aenter__(self) -> "PixelDojoClient":
+    async def __aenter__(self) -> PixelDojoClient:
         """Async context manager entry."""
         await self._ensure_client()
         return self
@@ -381,6 +377,7 @@ class PixelDojoClient:
 
         if destination:
             from pathlib import Path
+
             import aiofiles
 
             path = Path(destination)
@@ -439,7 +436,7 @@ class PixelDojoSyncClient:
         """Run coroutine in event loop."""
         return self._get_loop().run_until_complete(coro)
 
-    def __enter__(self) -> "PixelDojoSyncClient":
+    def __enter__(self) -> PixelDojoSyncClient:
         """Context manager entry."""
         self._run(self._async_client.__aenter__())
         return self

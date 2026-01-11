@@ -10,16 +10,13 @@ Supports:
 
 from __future__ import annotations
 
-import os
 from functools import lru_cache
 from pathlib import Path
-from typing import Any
 
 import keyring
-from platformdirs import user_config_dir, user_data_dir, user_cache_dir
+from platformdirs import user_cache_dir, user_config_dir, user_data_dir
 from pydantic import Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
-
 
 # Application identifiers
 APP_NAME = "pixeldojo"
@@ -149,7 +146,7 @@ class Config(BaseSettings):
         return v.rstrip("/")
 
     @model_validator(mode="after")
-    def load_keyring_api_key(self) -> "Config":
+    def load_keyring_api_key(self) -> Config:
         """Load API key from keyring if not set."""
         if not self.api_key:
             try:

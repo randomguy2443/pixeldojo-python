@@ -5,20 +5,19 @@ Custom widgets for PixelDojo GUI.
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional
 
-from PySide6.QtCore import Qt, Signal, QSize
-from PySide6.QtGui import QPixmap, QImage, QPainter, QPainterPath, QCursor
+from PySide6.QtCore import Qt, Signal
+from PySide6.QtGui import QCursor, QImage, QPixmap
 from PySide6.QtWidgets import (
-    QWidget,
-    QVBoxLayout,
+    QApplication,
+    QFileDialog,
+    QFrame,
     QHBoxLayout,
     QLabel,
-    QFrame,
-    QSizePolicy,
     QMenu,
-    QFileDialog,
-    QApplication,
+    QSizePolicy,
+    QVBoxLayout,
+    QWidget,
 )
 
 
@@ -155,7 +154,7 @@ class ImageCard(QFrame):
         filename, _ = QFileDialog.getSaveFileName(
             self,
             "Save Image",
-            f"pixeldojo_image.png",
+            "pixeldojo_image.png",
             "PNG Images (*.png);;JPEG Images (*.jpg);;All Files (*)",
         )
 

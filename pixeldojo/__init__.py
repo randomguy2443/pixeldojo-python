@@ -22,21 +22,21 @@ Usage:
 """
 
 from pixeldojo.client import PixelDojoClient, PixelDojoSyncClient
+from pixeldojo.config import Config, get_config
+from pixeldojo.exceptions import (
+    APIError,
+    AuthenticationError,
+    InsufficientCreditsError,
+    PixelDojoError,
+    RateLimitError,
+)
 from pixeldojo.models import (
+    AspectRatio,
     GenerateRequest,
     GenerateResponse,
     ImageResult,
     Model,
-    AspectRatio,
 )
-from pixeldojo.exceptions import (
-    PixelDojoError,
-    AuthenticationError,
-    InsufficientCreditsError,
-    RateLimitError,
-    APIError,
-)
-from pixeldojo.config import Config, get_config
 
 __version__ = "1.0.0"
 __author__ = "PixelDojo Team"

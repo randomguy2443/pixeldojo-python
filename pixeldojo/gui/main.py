@@ -6,8 +6,8 @@ Launch the PySide6-based desktop application.
 
 from __future__ import annotations
 
-import sys
 import os
+import sys
 
 # Ensure proper Qt platform on Linux
 if sys.platform == "linux":
@@ -22,9 +22,9 @@ def main() -> int:
         Exit code (0 for success)
     """
     # Import here to defer Qt initialization
-    from PySide6.QtWidgets import QApplication
     from PySide6.QtCore import Qt
-    from PySide6.QtGui import QFont, QIcon
+    from PySide6.QtGui import QFont
+    from PySide6.QtWidgets import QApplication
 
     from pixeldojo.gui.mainwindow import MainWindow
     from pixeldojo.gui.styles import get_stylesheet

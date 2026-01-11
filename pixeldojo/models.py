@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from enum import Enum
-from typing import Annotated, Any
+from typing import Annotated, Any, Iterator
 
 from pydantic import (
     BaseModel,
@@ -19,7 +19,6 @@ from pydantic import (
     Field,
     HttpUrl,
     field_validator,
-    model_validator,
 )
 
 
@@ -220,7 +219,7 @@ class GenerateResponse(BaseModel):
         """Return number of generated images."""
         return len(self.images)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[ImageResult]:
         """Iterate over images."""
         return iter(self.images)
 
