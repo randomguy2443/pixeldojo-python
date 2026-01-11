@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=PixelDojo Studio
+GenericName=AI Image Generator
+Comment=Generate stunning AI images with PixelDojo
+Exec=pixeldojo-gui
+Icon=pixeldojo
+Terminal=false
+Categories=Graphics;2DGraphics;RasterGraphics;
+Keywords=ai;image;generation;flux;art;
+StartupNotify=true
+StartupWMClass=pixeldojo-studio

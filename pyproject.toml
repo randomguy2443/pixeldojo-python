@@ -1,0 +1,90 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pixeldojo"
+version = "1.0.0"
+description = "Professional Python client, CLI, and GUI for PixelDojo AI Image Generation API"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    { name = "PixelDojo Team", email = "dev@pixeldojo.ai" }
+]
+keywords = ["ai", "image-generation", "flux", "api-client", "cli", "gui"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Environment :: X11 Applications :: Qt",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Multimedia :: Graphics",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+dependencies = [
+    "httpx>=0.27.0",
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+    "tenacity>=8.2.0",
+    "typer[all]>=0.12.0",
+    "rich>=13.7.0",
+    "PySide6>=6.6.0",
+    "pillow>=10.0.0",
+    "platformdirs>=4.0.0",
+    "keyring>=24.0.0",
+    "aiofiles>=23.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=4.1.0",
+    "respx>=0.21.0",
+    "mypy>=1.8.0",
+    "ruff>=0.2.0",
+    "pre-commit>=3.6.0",
+]
+
+[project.scripts]
+pixeldojo = "pixeldojo.cli.main:app"
+pixeldojo-gui = "pixeldojo.gui.main:main"
+
+[project.gui-scripts]
+pixeldojo-studio = "pixeldojo.gui.main:main"
+
+[project.urls]
+Homepage = "https://pixeldojo.ai"
+Documentation = "https://docs.pixeldojo.ai"
+Repository = "https://github.com/pixeldojo/pixeldojo-python"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pixeldojo"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "ANN", "B", "C4", "PTH", "SIM"]
+ignore = ["ANN101", "ANN102", "ANN401"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "-v --cov=pixeldojo --cov-report=term-missing"
